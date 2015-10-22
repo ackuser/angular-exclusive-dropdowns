@@ -1,0 +1,35 @@
+<div ng-app="SelectApp" ng-controller="SelectCtrl as vm">
+    <p>
+    Full List <select ng-options="col for col in vm.columnList"
+        ng-model="vm.itemFullList"></select>
+    </p>
+
+    <p>
+        1st:
+        <select ng-model="vm.select1"
+            ng-options="col for col in
+             vm.columnList|excludeUsed:vm.select2:vm.select3">
+        </select>
+    </p>
+
+    <p>
+        2nd:
+        <select ng-model="vm.select2"
+            ng-options="col for col in
+             vm.columnList|excludeUsed:vm.select1:vm.select3">
+        </select>
+    </p>
+
+    <p>
+        3rd:
+        <select ng-model="vm.select3"
+            ng-options="col for col in
+             vm.columnList|excludeUsed:vm.select1:vm.select2">
+        </select>
+    </p>
+
+    <input class="sel" type="text" ng-model="vm.select1"/>
+    <input class="sel" type="text" ng-model="vm.select2"/>
+    <input class="sel" type="text" ng-model="vm.select3"/>
+
+</div>
