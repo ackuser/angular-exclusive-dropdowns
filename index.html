@@ -1,35 +1,108 @@
-<div ng-app="SelectApp" ng-controller="SelectCtrl as vm">
-    <p>
-    Full List <select ng-options="col for col in vm.columnList"
-        ng-model="vm.itemFullList"></select>
-    </p>
+<!doctype html>
+<html>
 
-    <p>
-        1st:
-        <select ng-model="vm.select1"
-            ng-options="col for col in
-             vm.columnList|excludeUsed:vm.select2:vm.select3">
-        </select>
-    </p>
+  <head>
+    <meta charset="utf-8">
+    <title>SVG Circle Progress and AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="app.js"></script>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <p>
-        2nd:
-        <select ng-model="vm.select2"
-            ng-options="col for col in
-             vm.columnList|excludeUsed:vm.select1:vm.select3">
-        </select>
-    </p>
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
-    <p>
-        3rd:
-        <select ng-model="vm.select3"
-            ng-options="col for col in
-             vm.columnList|excludeUsed:vm.select1:vm.select2">
-        </select>
-    </p>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </head>
 
-    <input class="sel" type="text" ng-model="vm.select1"/>
-    <input class="sel" type="text" ng-model="vm.select2"/>
-    <input class="sel" type="text" ng-model="vm.select3"/>
+  <body>
+
+    <div ng-app="BrandsApp" ng-controller="BrandsCtrl">
+
+        <p>
+        Full List <select ng-options="col for col in columnList"
+            ng-model="itemFullList"></select>
+        </p>
+
+        <p>
+            1st:
+            <select ng-model="brand1"
+                ng-options="col for col in
+                 columnList|excludeUsed:brand2:brand3">
+            </select>
+        </p>
+
+        <p>
+            2nd:
+            <select ng-model="brand2"
+                ng-options="col for col in
+                 columnList|excludeUsed:brand1:brand3">
+            </select>
+        </p>
+
+        <p>
+            3rd:
+            <select ng-model="brand3"
+                ng-options="col for col in
+                 columnList|excludeUsed:brand1:brand2">
+            </select>
+        </p>
+
+        <input class="sel" type="text" ng-model="brand1"/>
+        <input class="sel" type="text" ng-model="brand2"/>
+        <input class="sel" type="text" ng-model="brand3"/>
+
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+        <div class="btn-group dropup">
+          <button class="btn" data-toggle="dropdown">{{brand1}}
+            <span class="caret"/>
+          </button>
+
+          <ul class="dropdown-menu">
+            <!-- dropdown menu links -->
+              <li ng-repeat="(index,name) in columnList|excludeUsed:brand2:brand3" ng-cloak
+                  ng-click="updateBrand($event, 1, name)">
+                  <a>{{name}}</a>
+              </li>
+          </ul>
+        </div>
+
+        <div class="btn-group dropup">
+          <button class="btn" data-toggle="dropdown">{{brand2}}
+            <span class="caret"/>
+          </button>
+
+          <ul class="dropdown-menu">
+            <!-- dropdown menu links -->
+            <li ng-repeat="(index,name) in columnList|excludeUsed:brand1:brand3" ng-cloak
+                ng-click="updateBrand($event, 2, name)">
+                <a>{{name}}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="btn-group dropup">
+          <button class="btn" data-toggle="dropdown">{{brand3}}
+            <span class="caret"/>
+          </button>
+
+          <ul class="dropdown-menu">
+            <!-- dropdown menu links -->
+            <li ng-repeat="(index,name) in columnList|excludeUsed:brand1:brand2"
+             ng-cloak ng-click="updateBrand($event, 3, name)">
+                <a>{{name}}</a>
+            </li>
+          </ul>
+        </div>
+    </div>
 
 </div>
+
+
+  </body>
+</html>

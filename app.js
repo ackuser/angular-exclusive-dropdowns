@@ -1,26 +1,46 @@
-app = angular.module('SelectApp', []);
+app = angular.module('BrandsApp', []);
 
-app.controller("SelectCtrl", function() {
-    var vm = this;
+app.controller("BrandsCtrl", function($scope) {
 
-    vm.columnList = ['red', 'orange', 'yellow', 'green',
-                     'blue', 'indigo', 'violet'];
 
-    vm.itemFullList = '';
+  $scope.columnList = [
+    'Square','Stripe','Paypal','Apple Pay','Google Wallet','Braintree','Android Pay','Samsung Pay','Amazon Payments','World Pay','Authorize Net','Venmo','Xoom','Paydiant'
+  ];
 
-    vm.select1 = '';
-    vm.select2 = '';
-    vm.select3 = '';
+  $scope.itemFullList = '';
+
+  $scope.brand1 = 'Paypal';
+  $scope.brand2 = 'Braintree';
+  $scope.brand3 = 'Amazon Payments';
+
+
+
+  $scope.updateBrand = function ($event, num_brand ,name)
+  {
+    switch(num_brand) {
+        case 1:
+            $scope.brand1 = name;
+            break;
+        case 2:
+            $scope.brand2 = name;
+            break;
+        case 3:
+            $scope.brand3 = name;
+            break;
+    }
+    //$event.stopPropagation();
+  }
+
 });
 
 app.filter('excludeUsed', function() {
-    var filter = function(items, excludeVal1, excludeVal2) {
-        var checkItem = function(item) {
-            return (item != excludeVal1) && (item != excludeVal2);
-        };
-
-        return items.filter(checkItem);
+  var filter = function(items, excludeVal1, excludeVal2) {
+    var checkItem = function(item) {
+      return (item != excludeVal1) && (item != excludeVal2);
     };
 
-    return filter;
+    return items.filter(checkItem);
+  };
+
+  return filter;
 });
